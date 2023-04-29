@@ -6,26 +6,23 @@ import './App.css';   //logo spin
 class App extends Component {
   constructor(){
     super();
+
     this.state={
-      monsters:[
-      {
-        name: 'Linda',
-        id: '123eae123'
-      },
-      {
-        name: 'Frank',
-        id: '123ea23'
-      },
-      {
-        name: 'Jacky',
-        id: '1ae123'
-      },
-      {
-        name: 'Andrei',
-        id: '1asd3'
-      }
-    ]
+      monsters: [],
     };
+  }
+
+  componentDidMount(){
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then((response) => 
+    response.json())//promise
+    .then((users)=>this.setState(()=>{
+      return {monsters:users}
+    },
+    ()=>{
+      console.log(this.state);
+    }
+    ));
   }
 
   render(){
